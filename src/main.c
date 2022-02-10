@@ -219,7 +219,7 @@ void search_book() {
 	printf("File: %s Line: %d", __FILE__, __LINE__);
 	console(RESET);
 	assert(1);
-	//TODO: Implement search_book
+	//TODO(#3): Implement search_book
 }
 
 //TODO: Implement more functions
