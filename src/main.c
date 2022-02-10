@@ -210,7 +210,7 @@ void add_book() {
 	printf("File: %s Line: %d", __FILE__, __LINE__);
 	console(RESET);
 	assert(1);
-	//TODO: Implement add_book
+	//TODO(#2): Implement add_book
 }
 
 void search_book() {
