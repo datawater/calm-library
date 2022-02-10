@@ -5,7 +5,7 @@
 
 #include "include/datadb.h"
 
-//TODO: Fully implement datadb
+//TODO(#1): Fully implement datadb
 
 bool file_exists(char *fname) {
     if (access(fname, F_OK) == 0) {
