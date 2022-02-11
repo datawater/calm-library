@@ -2,8 +2,6 @@
 #include <assert.h>
 #include <stdbool.h>
 
-#include "include/datadb.h"
-
 #ifdef _WIN32
 #include <Windows.h>
 #define sleep Sleep
@@ -240,15 +238,6 @@ void what_do() {
 }
 
 int main() {
-	
-	datadb_t _db;
-	_db.fname = "test.ddb";
-	_db.db_file = NULL;
-	_db.INIT_DONE = false;
-	_db.STATUS = DATADB_OK;
-
-	datadb_t db = datadb_init(_db);
-	printf(db.INIT_DONE ? "INIT DONE\n" : "INIT NOT DONE\n");
 
 	//return 0;
 

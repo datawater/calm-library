@@ -6,13 +6,11 @@ OUTPUT = out/main
 
 main:
 	-mkdir out
-	$(CC) $(CFLAGS) $(DATADB) --shared -o out/datadb.o
 	$(CC) $(CFLAGS) out/datadb.o $(SRC) -o $(OUTPUT)
 	-chmod +x $(OUTPUT)
 
 run:
 	-mkdir out
-	$(CC) $(CFLAGS) $(DATADB) --shared -o out/datadb.o
 	$(CC) $(CFLAGS) out/datadb.o $(SRC) -o $(OUTPUT)
 	-chmod +x $(OUTPUT)
 	@if ./out/main; then \
