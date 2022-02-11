@@ -1,6 +1,6 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -static -std=c99
-SRC = src/main.c
+CC = g++
+CFLAGS = -Wall -Wextra -static -std=c++17
+SRC = src/main.cpp
 OUTPUT = out/main
 
 main:
