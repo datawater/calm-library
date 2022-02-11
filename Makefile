@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -static
+CFLAGS = -Wall -Wextra -static -std=c99
 SRC = src/main.c
 OUTPUT = out/main
 
