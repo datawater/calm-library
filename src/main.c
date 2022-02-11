@@ -181,7 +181,7 @@ void ascii_hello() {
 void todo(char* msg) {
 	printf("\n");
 	console(RED);
-	printf("TODO: ");
+	printf("TODO(#5): ");
 	printf("%s\n", msg);
 	console(RESET);
 	assert(1);
