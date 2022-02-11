@@ -208,7 +208,7 @@ void add_book() {
 	printf("File: %s Line: %d", __FILE__, __LINE__);
 	console(RESET);
 	assert(1);
-	//TODO(#2): Implement add_book
+	//TODO(#1): Implement add_book
 }
 
 void search_book() {
@@ -217,10 +217,10 @@ void search_book() {
 	printf("File: %s Line: %d", __FILE__, __LINE__);
 	console(RESET);
 	assert(1);
-	//TODO(#3): Implement search_book
+	//TODO(#2): Implement search_book
 }
 
-//TODO(#4): Implement more functions
+//TODO(#3): Implement more functions
 
 void what_do() {
 	char c = getchar();
@@ -238,8 +238,6 @@ void what_do() {
 }
 
 int main() {
-
-	//return 0;
 
 	console(CLEAR);
 	ascii_hello();
