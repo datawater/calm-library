@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -Wextra -static -std=c++17
+CFLAGS = -Wall -Wextra -Werror -static -std=c++17
 SRC = src/main.cpp
 OUTPUT = out/main
 
