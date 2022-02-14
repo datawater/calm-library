@@ -1,4 +1,8 @@
 #include <fstream>
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <sstream>
 
 #include <unistd.h>
 #include <assert.h>
@@ -159,25 +163,6 @@ void console(int c) {
 	}
 }
 
-void charbychar(char *msg, int delay) {
-	for (size_t i = 0; i < strlen(msg); ++i) {
-		printf("%c", msg[i]);
-		sleep(delay);
-	}
-}
-
-void ascii_hello() {
-	printf("_$$_____$$_$$$$$$__$$______$$________$$$$\n");
-	printf("_$$_____$$_$$______$$______$$______$$____$$\n");
-	printf("_$$$$$$$$$_$$$$$$$_$$______$$______$$____$$\n");
-	printf("_$$_____$$_$$______$$______$$______$$____$$\n");
-	printf("_$$_____$$_$$______$$______$$______$$____$$\n");
-	printf("_$$_____$$_$$$$$$$_$$$$$$$_$$$$$$$___$$$$\n\n");
-	
-	for (int i; i < 5; ++i) {
-		printf("\n");
-	}
-}
 
 void todo(char* msg) {
 	printf("\n");
@@ -186,21 +171,6 @@ void todo(char* msg) {
 	printf("%s\n", msg);
 	console(RESET);
 	assert(1);
-}
-
-void usage() {
-	console(GREEN);
-	printf("[1] ");
-	console(RESET);
-	console (YELLOW);
-	printf("Add a new book\n");
-	console(RESET);
-	console(GREEN);
-	printf("[2] ");
-	console(RESET);
-	console (YELLOW);
-	printf("Search For A book\n");
-	console (RESET);
 }
 
 bool file_exists(char* fname) {
@@ -226,6 +196,7 @@ bool valid_books_file(std::string fname) {
 	//printf(line);
 	return true;
 }
+
 
 std::string uinput() {
 	std::string result;
@@ -362,15 +333,187 @@ void add_book() {
 }
 
 void search_book() {
-	todo((char*) "Search book");
-	console(RED);
-	printf("File: %s Line: %d", __FILE__, __LINE__);
+	std::string db_file;
+	console(GREEN);
+	printf("Enter the database file: ");
 	console(RESET);
-	assert(1);
-	//TODO: Implement search_book
+	fflush(stdin);
+	db_file = uinput();
+	
+	printf("\n");
+	
+	if (db_file.find(".calm") == std::string::npos) {
+		db_file += ".calm";
+	}
+
+	sleep(0.2);
+	
+	if (!file_exists(&db_file[0])) {
+		console(RED);
+		printf("database file Doesn't exists\n");
+		console(RESET);
+		assert(1);
+	}
+
+	if (!valid_books_file(db_file)) {
+		console(RED);
+		printf("Invalid database file\n");
+		console(RESET);
+		assert(1);
+	}
+
+	console(GREEN);
+	printf("How do you want to search?\n");
+	console(RESET);
+	console(GREEN);
+	printf("[1] ");
+	console(RESET);
+	console (YELLOW);
+	printf("By Title\n");
+	console(RESET);
+	console(GREEN);
+	printf("[2] ");
+	console(RESET);
+	console (YELLOW);
+	printf("quit\n");
+
+	char c = getchar();
+	if (c == *"1") {
+		std::string title;
+		console(GREEN);
+		printf("Enter The Title: ");
+		console(RESET);
+		title = uinput();
+		
+		std::ifstream _fi(db_file, std::ios::binary);
+		//load the file into memory
+		std::string _file;
+		std::string line;
+
+		std::stringstream ss;
+		bool found = false;
+		int to_add = 5;
+
+		while (std::getline(_fi, line)) {
+			line.erase(0, 3);
+			if (line.find(title) != std::string::npos) {
+				ss << line << "\n";
+				found = true;
+			}
+			if (found && to_add > 0) {
+				ss << line << "\n";
+				to_add--;
+			} else if (found && to_add == 0) {
+				break;
+			}
+		}
+
+		if (!found) {
+			console(RED);
+			printf("Book not found\n");
+			console(RESET);
+			return;
+		} else {
+			//print the data
+			console(GREEN);
+			printf("Found Book! \n");
+			console(YELLOW);
+			
+			std::stringstream ss2;
+			ss2 << ss.str();
+			std::string line2;
+			while (std::getline(ss2, line2)) {
+				printf("%s\n", line2.c_str());
+			}
+			console(RESET);
+		}
+	} else if (c == *"2") {
+		exit(0);
+	} else {
+		console(RED);
+		printf("Invalid option\n");
+		console(RESET);
+		return;
+	}
 }
 
 //TODO: Implement more functions
+
+void charbychar(char *msg, int delay) {
+	for (size_t i = 0; i < strlen(msg); ++i) {
+		printf("%c", msg[i]);
+		sleep(delay);
+	}
+}
+
+void ascii_hello() {
+	//ascii art by http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+
+	printf(" _     _  \n");
+	printf("| |   (_) \n");
+	printf("| |__  _  \n");
+	printf("| '_ \\| | \n");
+	printf("| | | | | \n");
+	printf("|_| |_|_| \n");
+
+	for (int i = 0; i < 4; ++i) {
+		printf("\n");
+	}
+}
+
+void ascii_bye() {
+	//ascii art by http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+	
+	printf(" _\n");
+	printf("| |\n");
+	printf("| |__  _   _  ___ \n");
+	printf("| '_ \\| | | |/ _ \\\n");	
+	printf("| |_) | |_| |  __/\n");
+	printf("|_.__/ \\__, |\\___|\n");
+	printf("        __/ |      \n");
+	printf("       |___/       \n");
+	
+	for (int i = 0; i < 4; ++i) {
+		printf("\n");
+	}
+}
+
+void welcome() {
+	ascii_hello();
+	console(YELLOW);
+	charbychar((char*) "Hello, Welcome To The \"Calm Library\" Library management system\nWhat would you like to do?\n\n", 25);
+	console(RESET);
+}
+
+void usage() {
+	console(GREEN);
+	printf("[1] ");
+	console(RESET);
+	console (YELLOW);
+	printf("Add a new book\n");
+	console(RESET);
+	console(GREEN);
+	printf("[2] ");
+	console(RESET);
+	console (YELLOW);
+	printf("Search For A book\n");
+	console (RESET);
+	console(GREEN);
+	printf("[q] ");
+	console(RESET);
+	console (YELLOW);
+	printf("Exit\n");
+	console(RESET);
+}
+
+void bye() {
+	console(CLEAR);
+	ascii_bye();
+	console(YELLOW);
+	charbychar((char*) "Thank you for using the \"Calm Library\" Library management system\n\n", 25);
+	console(RESET);
+	exit(0);
+}
 
 void what_do() {
 	char c = getchar();
@@ -379,21 +522,24 @@ void what_do() {
 		add_book();
 	} else if (c == *"2") {
 		search_book();
-	} else if (c == *"\n") {assert(1);} 
+	} else if (c == *"\n") {assert(1);}
+	else if (c == *"q") {bye();}
 	else {
 		printf("Invalid input\n");
 		assert(1);
 	}
-
 }
+
+bool first_join = true;
 
 int main() {
 
 	console(CLEAR);
-	ascii_hello();
-	console(YELLOW);
-	charbychar((char*) "Hello, Welcome To The \"Calm Library\" Library management system\nWhat would you like to do?\n\n", 25);
-	console(RESET);
+
+	if (first_join) {
+		welcome();
+		first_join = false;
+	}
 
 	usage();
 	what_do();
