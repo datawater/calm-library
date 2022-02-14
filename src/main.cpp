@@ -1,7 +1,4 @@
 #include <fstream>
-#include <iostream>
-#include <random>
-#include <algorithm>
 #include <sstream>
 
 #include <unistd.h>
@@ -9,7 +6,10 @@
 
 #ifdef _WIN32
 #include <Windows.h>
+
 #define sleep Sleep
+
+//? maybe i should add this to a seperate file
 
 void clear_win() {
     COORD topLeft  = { 0, 0 };

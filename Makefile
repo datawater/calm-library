@@ -26,10 +26,11 @@ run:
 	-strip $(OUTPUT) -s -R .comment -R .gnu.version --strip-unneeded
 	./$(OUTPUT)
 
-release:
+upx:
 	-mkdir out
 	$(CC) $(CFLAGS) $(SRC) -o $(OUTPUT)
 	-chmod +x $(OUTPUT)
 	-strip $(OUTPUT) -s -R .comment -R .gnu.version --strip-unneeded
+	-export upx=""
 	upx --best --ultra-brute $(OUTPUT) -o $(UPX_OUT)
 	mv $(UPX_OUT) $(OUTPUT)
