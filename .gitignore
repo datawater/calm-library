@@ -1,3 +1,4 @@
 /out
 .snitch.yaml
 *.calm
+*.calm_settings
