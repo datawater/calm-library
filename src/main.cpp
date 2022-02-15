@@ -161,6 +161,7 @@ void console(int c) {
 		break;
 		default:
 			printf("NON EXISTANT COLOR");
+			exit(1);
 		break;
 	}
 }
