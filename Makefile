@@ -1,6 +1,6 @@
 CC = g++
 LINKER = lld
-CFLAGS = -Wall -Wextra -Werror -std=c++17 -Os -ffunction-sections -fdata-sections -Wl,--gc-sections -s -fuse-ld=$(LINKER)
+CFLAGS = -Wall -Wextra -std=c++17 -Os -ffunction-sections -fdata-sections -Wl,--gc-sections -s -fuse-ld=$(LINKER)
 SRC = src/main.cpp
 OUTPUT_ = out/main
 UPX_OUT_ = out/main_upx
