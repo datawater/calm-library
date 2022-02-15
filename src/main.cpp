@@ -232,16 +232,16 @@ void ascii_hello() {
 
 void ascii_bye() {
 	//ascii art by http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
-	
+
 	printf(" _\n");
 	printf("| |\n");
 	printf("| |__  _   _  ___ \n");
-	printf("| '_ \\| | | |/ _ \\\n");	
+	printf("| '_ \\| | | |/ _ \\\n");
 	printf("| |_) | |_| |  __/\n");
 	printf("|_.__/ \\__, |\\___|\n");
 	printf("        __/ |      \n");
 	printf("       |___/       \n");
-	
+
 	for (int i = 0; i < 4; ++i) {
 		printf("\n");
 	}
@@ -265,7 +265,7 @@ void ascii_search() {
 
 void ascii_add() {
 	//ascii art by http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
-	
+
 	printf("           _     _ \n");
 	printf("          | |   | |\n");
 	printf("  __ _  __| | __| |\n");
@@ -350,7 +350,7 @@ void add_book() {
 	std::string description;
 	std::string bookshelf;
 	std::string comment;
-	
+
 	console(GREEN);
 	printf("Enter the title: ");
 	console(RESET);
@@ -441,15 +441,15 @@ void search_book() {
 	console(RESET);
 	fflush(stdin);
 	db_file = uinput();
-	
+
 	printf("\n");
-	
+
 	if (db_file.find(".calm") == std::string::npos) {
 		db_file += ".calm";
 	}
 
 	sleep(0.2);
-	
+
 	if (!file_exists(&db_file[0])) {
 		console(RED);
 		printf("database file Doesn't exists\n");
@@ -486,7 +486,7 @@ void search_book() {
 		printf("Enter The Title: ");
 		console(RESET);
 		title = uinput();
-		
+
 		std::ifstream _fi(db_file, std::ios::binary);
 		//load the file into memory
 		std::string _file;
@@ -520,14 +520,14 @@ void search_book() {
 			console(GREEN);
 			printf("Found Book! \n");
 			console(YELLOW);
-			
+
 			std::stringstream ss2;
 			ss2 << ss.str();
 			std::string line2;
 			while (std::getline(ss2, line2)) {
 				printf("%s\n", line2.c_str());
 			}
-		
+
 			console(RESET);
 		}
 	} else if (c == *"2") {
@@ -768,8 +768,6 @@ void what_do() {
 	}
 }
 
-bool first_join = true;
-
 int main(int argc, char *argv[]) {
 
 	(void) argc;
@@ -778,11 +776,7 @@ int main(int argc, char *argv[]) {
 	settings_init();
 
 	console(CLEAR);
-
-	if (first_join) {
-		welcome();
-		first_join = false;
-	}
+	welcome();
 
 	usage();
 	what_do();
