@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <cstring>
 
 #include <unistd.h>
 
